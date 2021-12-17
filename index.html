@@ -175,7 +175,10 @@
 
         function update() {
             if (!GAME_OVER && !GAME_WIN) time ++
+
             timeText.setText('time: ' + time)
+            timeText.setX(player.body.x*0.5+200)
+            scoreText.setX(player.body.x*0.5+200)
             if (cursors.left.isDown) {
                 player.setVelocityX(-150)
                 player.anims.play('left', true)

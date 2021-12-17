@@ -133,7 +133,7 @@
             platforms.create(620, 200, 'platform')
             platforms.create(700, 280, 'platform')
             platforms.create(770, 250, 'platform')
-            platforms.getChildren().forEach(c => c.setScale(0.3).setOrigin(0).refreshBody())
+            platforms.getChildren().forEach(c => c.setScale(0.3, 0.1).setOrigin(0).refreshBody())
 
             this.physics.add.collider(player, platforms)
 
@@ -156,17 +156,15 @@
             enemies = this.physics.add.group({
                 key: 'enemy',
                 setScale: { x: 0.7, y: 0.7 },
-                repeat: 2,
-                setXY: { x: 12, y: 0, stepX: 250 },
-                setVelocityX: Phaser.Math.FloatBetween(70, 100)
+                repeat: 3,
+                setXY: { x: 12, y: 0, stepX: 200 },
 
 
             })
             enemies.children.iterate(function (child) {
                 child.setCollideWorldBounds(true)
                 child.setBounceX(1)
-                child.body.setVelocityX(50)
-                if (child.body.deltaX() > 5) child.body.velocity.x *= -1
+                child.body.setVelocityX(Phaser.Math.FloatBetween(-200, 200))
             })
             this.physics.add.collider(enemies, enemies)
             this.physics.add.collider(player, enemies, gameOver, null, this)

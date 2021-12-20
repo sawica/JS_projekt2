@@ -74,7 +74,7 @@
             back.setScrollFactor(0)
             this.cameras.main.setBounds(0, 0, 1000, 500)
             this.physics.world.setBounds(0, 0, 1000, 480)
-            player = this.physics.add.sprite(600, 100, 'player')
+            player = this.physics.add.sprite(Phaser.Math.FloatBetween(200, 600), 100, 'player')
             player.setCollideWorldBounds(true)
             player.setBounce(0.2)
             this.cameras.main.startFollow(player)
@@ -164,8 +164,11 @@
             enemies.children.iterate(function (child) {
                 child.setCollideWorldBounds(true)
                 child.setBounceX(1)
-                child.body.setVelocityX(Phaser.Math.FloatBetween(-200, 200))
+                child.setBounceY(1)
+
+                child.body.setVelocityX(Phaser.Math.FloatBetween(-150, 150))
             })
+            this.physics.add.collider(enemies, platforms)
             this.physics.add.collider(enemies, enemies)
             this.physics.add.collider(player, enemies, gameOver, null, this)
 

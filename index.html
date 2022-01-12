@@ -67,6 +67,10 @@
         let scoreText
         let time = 0
         let timeText
+        let nextButton
+        let enemiesCounter = 1
+        let platformsCounter = 26
+        let starsCounter = 11
 
         function create() {
             let back = this.add.tileSprite(0, 28, 1000, 450, 'background')
@@ -118,21 +122,37 @@
             gameWinText.setOrigin(0.5)
             gameWinText.visible = false
 
+            //nextButton.visible = false
+           // nextButton.setText("next level")
+            // platforms = this.physics.add.staticGroup()
+            // platforms.create(250, 420, 'platform')
+            // platforms.create(430, 330, 'platform')
+            // platforms.create(150, 360, 'platform')
+            // platforms.create(70, 300, 'platform')
+            // platforms.create(520, 390, 'platform')
+            // platforms.create(610, 340, 'platform')
+            // platforms.create(200, 250, 'platform')
+            // platforms.create(300, 200, 'platform')
+            // platforms.create(400, 150, 'platform')
+            // platforms.create(450, 100, 'platform')
+            // platforms.create(500, 150, 'platform')
+            // platforms.create(620, 200, 'platform')
+            // platforms.create(700, 280, 'platform')
+            // platforms.create(770, 250, 'platform')
+            // platforms.getChildren().forEach(c => c.setScale(0.3, 0.1).setOrigin(0).refreshBody())
+
+            // platforms = this.physics.add.staticGroup({
+            //     key: 'platform',
+            //     setScale: { x: 0.3, y: 0.1},
+            //     repeat: 16,
+            //     setXY: { x: Phaser.Math.FloatBetween(770, 200), y: Phaser.Math.FloatBetween(50,
+            //             100), }
+            // })
+
             platforms = this.physics.add.staticGroup()
-            platforms.create(250, 420, 'platform')
-            platforms.create(430, 330, 'platform')
-            platforms.create(150, 360, 'platform')
-            platforms.create(70, 300, 'platform')
-            platforms.create(520, 390, 'platform')
-            platforms.create(610, 340, 'platform')
-            platforms.create(200, 250, 'platform')
-            platforms.create(300, 200, 'platform')
-            platforms.create(400, 150, 'platform')
-            platforms.create(450, 100, 'platform')
-            platforms.create(500, 150, 'platform')
-            platforms.create(620, 200, 'platform')
-            platforms.create(700, 280, 'platform')
-            platforms.create(770, 250, 'platform')
+            for(let i = 0; i < platformsCounter; i++){
+                platforms.create(Phaser.Math.FloatBetween(150, 900), Phaser.Math.FloatBetween(80, 450), 'platform')
+            }
             platforms.getChildren().forEach(c => c.setScale(0.3, 0.1).setOrigin(0).refreshBody())
 
             this.physics.add.collider(player, platforms)
@@ -140,7 +160,7 @@
             stars = this.physics.add.group({
                 key: 'star',
                 setScale: { x: 0.2, y: 0.2 },
-                repeat: 11,
+                repeat: starsCounter-1,
                 setXY: { x: 12, y: 0, stepX: 70 },
 
             })
@@ -156,7 +176,7 @@
             enemies = this.physics.add.group({
                 key: 'enemy',
                 setScale: { x: 0.7, y: 0.7 },
-                repeat: 3,
+                repeat: enemiesCounter,
                 setXY: { x: 12, y: 0, stepX: 200 },
 
 
@@ -213,7 +233,8 @@
                 score += 10
                 scoreText.setText('score: ' + score)
 
-                if (score === 120) {
+
+                if (score === 10 * starsCounter) {
                     gameWin()
                 }
             }
@@ -222,6 +243,10 @@
         function gameWin () {
             GAME_WIN = true
             gameWinText.visible = true
+            // nextButton.visible = true
+            enemiesCounter++
+            starsCounter++
+            platformsCounter =- 6
         }
         function gameOver ()
         {

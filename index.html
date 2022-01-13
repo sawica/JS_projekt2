@@ -19,7 +19,7 @@
         let config = {
             type: Phaser.AUTO,
             width: 900,
-            height: 500,
+            height: 600,
             parent: appDiv,
             physics: {
                 default: 'arcade',
@@ -76,11 +76,11 @@
         let starsCounter = 30
 
         function create() {
-            let back = this.add.tileSprite(0, 28, 3000, 450, 'background')
+            let back = this.add.tileSprite(0, 28, 3000, 550, 'background')
             back.setOrigin(0)
             back.setScrollFactor(0)
-            this.cameras.main.setBounds(0, 0, 3000, 500)
-            this.physics.world.setBounds(0, 0, 3000, 480)
+            this.cameras.main.setBounds(0, 0, 3000, 600)
+            this.physics.world.setBounds(0, 0, 3000, 580)
             player = this.physics.add.sprite(Phaser.Math.FloatBetween(200, 600), 100, 'player')
             player.setCollideWorldBounds(true)
             player.setBounce(0.2)
@@ -110,11 +110,13 @@
 
             timeText = this.add.text(this.physics.world.bounds.centerX, 40, 'time: 0', { fontSize: '32px', fill:
                     '#fff', align: "center"})
+            timeText.setOrigin(0.5)
             scoreText = this.add.text(this.physics.world.bounds.centerX, 16, 'score: 0', { fontSize: '32px', fill:
                     '#fff', align: "center"})
+            scoreText.setOrigin(0.5)
             levelText = this.add.text(this.physics.world.bounds.centerX, 66, 'score: 0', { fontSize: '32px', fill:
                     '#fff', align: "center"})
-
+            levelText.setOrigin(0.5)
             gameOverText = this.add.text(this.physics.world.bounds.centerX, 250,
                 'GAME OVER',
                 {font: "40px Arial", fill: "#ffffff", align: "center"})
@@ -158,7 +160,7 @@
 
             platforms = this.physics.add.staticGroup()
             for(let i = 0; i < platformsCounter; i++){
-                platforms.create(Phaser.Math.FloatBetween(150, 2900), Phaser.Math.FloatBetween(80, 450), 'platform')
+                platforms.create(Phaser.Math.FloatBetween(150, 2900), Phaser.Math.FloatBetween(180, 550), 'platform')
             }
             platforms.getChildren().forEach(c => c.setScale(0.3, 0.1).setOrigin(0).refreshBody())
 
